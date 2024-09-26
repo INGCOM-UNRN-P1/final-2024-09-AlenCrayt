@@ -10,7 +10,8 @@ int i = 0;
 void eliminar_string(char **strings, int *cantidad_de_strings, int indice) {
     free(strings[indice]);
 
-    for (int i = indice; i < *cantidad_de_strings - 1; i++) {
+    for (int i = indice; i < *cantidad_de_strings - 1; i++) 
+    {
         strings[i] = strings[i + 1];
     }
 
@@ -32,11 +33,13 @@ int main()
     }
     nombre_archivo[i] = '\0';
     printf("Buscando: %s\n", nombre_archivo);
+
     char word[25] = {NULL};
     char **lista_palabras = NULL;
     int p_1;
     int z = 0;
     int cantidad_de_palabras = 0;
+
     //A base de un espacio hay que separar las palabras individualmente
     FILE *archivo_abierto = fopen(nombre_archivo, "r");
     fseek(archivo_abierto, 0, SEEK_END);
@@ -44,6 +47,7 @@ int main()
     char *buffer = malloc((largo_archivo * sizeof(char)));
     fseek(archivo_abierto, 0, SEEK_SET);
     size_t cantidad_de_caracteres = fread(buffer, sizeof(char), largo_archivo, archivo_abierto);
+    
     for (size_t n = 0; strlen(buffer) >= n; n++) 
     {
         if (buffer[n] == ' ') 
@@ -75,7 +79,6 @@ int main()
             if (strcmp(lista_palabras[i], lista_palabras[x]) == 0) 
             {
                 eliminar_string(lista_palabras, &cantidad_de_palabras, x);
-                cantidad_de_caracteres -= 1;
             }
             x++;
         }
